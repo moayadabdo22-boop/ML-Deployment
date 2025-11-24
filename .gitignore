@@ -1,3 +1,20 @@
-venv/
+# Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# OS / IDE stuff
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Large model files
+models/model.pkl
+
