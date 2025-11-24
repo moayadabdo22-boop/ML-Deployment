@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>California Housing Price Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            padding: 24px 32px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+        .upload-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        input[type="file"] {
+            padding: 6px;
+        }
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            background: #3366ff;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        button:disabled {
+            background: #9aa8ff;
+            cursor: not-allowed;
+        }
+        .status {
+            text-align: center;
+            margin-bottom: 16px;
+            min-height: 20px;
+            color: #333;
+        }
+        .error {
+            color: #c0392b;
+        }
+        .results {
+            margin-top: 24px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+        th, td {
+            border: 1px solid #e1e4eb;
+            padding: 6px 8px;
+            text-align: right;
+            font-size: 14px;
+        }
+        th {
+            background: #f0f2f8;
+        }
+        img {
+            max-width: 100%;
+            margin-top: 16px;
+            border-radius: 8px;
+            border: 1px solid #e1e4eb;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>California Housing Price Predictor</h1>
+    <p class="subtitle">Upload a CSV file with housing features to get predicted house values.</p>
+
+    <div class="upload-section">
+        <input type="file" id="fileInput" accept=".csv" />
+        <button id="uploadBtn">Upload & Predict</button>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <div class="results" id="results" style="display:none;">
+        <h2>Prediction Results</h2>
+        <p id="summary"></p>
+        <div id="tableContainer"></div>
+        <h3>Predictions Distribution</h3>
+        <img id="plotImg" alt="Predictions plot" />
+    </div>
+</div>
+
+<script>
+    const uploadBtn = document.getElementById("uploadBtn");
+    const fileInput = document.getElementById("fileInput");
+    const statusEl = document.getElementById("status");
+    const resultsEl = document.getElementById("results");
+    const summaryEl = document.getElementById("summary");
+    const tableContainer = document.getElementById("tableContainer");
+    const plotImg = document.getElementById("plotImg");
+
+    const API_BASE = "http://127.0.0.1:8000";
+
+    uploadBtn.addEventListener("click", async () => {
+        const file = fileInput.files[0];
+        if (!file) {
+            statusEl.textContent = "Please select a CSV file first.";
+            statusEl.classList.add("error");
+            return;
+        }
+
+        statusEl.textContent = "";
+        statusEl.classList.remove("error");
+        uploadBtn.disabled = true;
+        uploadBtn.textContent = "Uploading...";
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const resp = await fetch(`${API_BASE}/predict`, {
+                method: "POST",
+                body: formData
+            });
+
+            if (!resp.ok) {
+                const errData = await resp.json().catch(() => ({}));
+                const msg = errData.detail || "Server error.";
+                throw new Error(msg);
+            }
+
+            const data = await resp.json();
+            const preds = data.predictions || [];
+            const numRows = data.num_rows || preds.length;
+            const plotUrl = data.plot_url ? `${API_BASE}${data.plot_url}` : null;
+
+            resultsEl.style.display = "block";
+            summaryEl.textContent = `Number of rows: ${numRows}. Showing first ${
+                Math.min(preds.length, 20)
+            } predictions.`;
+
+            // Build table
+            let html = "<table><thead><tr><th>#</th><th>Predicted Value</th></tr></thead><tbody>";
+            preds.slice(0, 20).forEach((p, idx) => {
+                html += `<tr><td>${idx + 1}</td><td>${p.toFixed(2)}</td></tr>`;
+            });
+            html += "</tbody></table>";
+            tableContainer.innerHTML = html;
+
+            if (plotUrl) {
+                plotImg.src = plotUrl + `?t=${Date.now()}`;
+            }
+
+            statusEl.textContent = "Prediction completed successfully.";
+            statusEl.classList.remove("error");
+        } catch (err) {
+            console.error(err);
+            statusEl.textContent = `Error: ${err.message}`;
+            statusEl.classList.add("error");
+            resultsEl.style.display = "none";
+        } finally {
+            uploadBtn.disabled = false;
+            uploadBtn.textContent = "Upload & Predict";
+        }
+    });
+</script>
+</body>
+</html>

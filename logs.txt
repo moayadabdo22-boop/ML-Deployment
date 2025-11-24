@@ -1,0 +1,50 @@
+2025-11-19 14:44:19,445 - train_model - INFO - Starting model training...
+2025-11-19 14:44:42,700 - train_model - INFO - Model training finished.
+2025-11-19 14:44:42,878 - train_model - INFO - MAE: 32034.677, R2: 0.812
+2025-11-19 14:44:43,267 - train_model - INFO - Model saved to models/model.joblib
+2025-11-19 14:59:02,605 - predict - INFO - Loading model...
+2025-11-19 14:59:03,977 - predict - INFO - Model loaded.
+2025-11-19 14:59:03,977 - predict - INFO - Making predictions for 20640 rows.
+2025-11-19 14:59:04,563 - visualize - INFO - Prediction plot saved to backend/static/predictions.png
+2025-11-19 15:15:37,595 - preprocess - ERROR - Uploaded file is missing required columns: ['longitude', 'latitude', 'housing_median_age', 'total_rooms', 'total_bedrooms', 'population', 'households', 'median_income']
+2025-11-19 15:15:37,595 - app - ERROR - Uploaded file is missing required columns: ['longitude', 'latitude', 'housing_median_age', 'total_rooms', 'total_bedrooms', 'population', 'households', 'median_income']
+2025-11-19 15:15:44,300 - preprocess - ERROR - Uploaded file is missing required columns: ['longitude', 'latitude', 'housing_median_age', 'total_rooms', 'total_bedrooms', 'population', 'households', 'median_income']
+2025-11-19 15:15:44,300 - app - ERROR - Uploaded file is missing required columns: ['longitude', 'latitude', 'housing_median_age', 'total_rooms', 'total_bedrooms', 'population', 'households', 'median_income']
+2025-11-19 15:15:52,043 - preprocess - ERROR - Uploaded file is missing required columns: ['longitude', 'latitude', 'housing_median_age', 'total_rooms', 'total_bedrooms', 'population', 'households', 'median_income']
+2025-11-19 15:15:52,043 - app - ERROR - Uploaded file is missing required columns: ['longitude', 'latitude', 'housing_median_age', 'total_rooms', 'total_bedrooms', 'population', 'households', 'median_income']
+2025-11-19 15:30:40,737 - predict - INFO - Loading model...
+2025-11-19 15:30:43,548 - predict - INFO - Model loaded.
+2025-11-19 15:30:43,549 - predict - INFO - Making predictions for 20640 rows.
+2025-11-19 15:30:44,605 - visualize - INFO - Prediction plot saved to backend/static/predictions.png
+2025-11-19 19:32:20,763 - predict - INFO - Loading model...
+2025-11-19 19:32:24,418 - predict - INFO - Model loaded.
+2025-11-19 19:32:24,418 - predict - INFO - Making predictions for 20640 rows.
+2025-11-19 19:32:25,717 - visualize - INFO - Prediction plot saved to backend/static/predictions.png
+2025-11-19 19:35:46,472 - train_model - INFO - Starting model training...
+2025-11-19 19:36:20,225 - train_model - INFO - Model training finished.
+2025-11-19 19:36:20,470 - train_model - INFO - MAE: 32034.677, R2: 0.812
+2025-11-19 19:36:21,847 - train_model - INFO - Model saved to models/model.joblib
+2025-11-19 19:36:57,280 - train_model - INFO - Starting model training...
+2025-11-19 19:37:34,801 - train_model - INFO - Model training finished.
+2025-11-19 19:37:35,053 - train_model - INFO - MAE: 32034.677, R2: 0.812
+2025-11-19 19:37:35,618 - train_model - INFO - Model saved to models/model.pkl
+2025-11-19 19:38:53,709 - predict - INFO - Loading model...
+2025-11-19 19:38:55,991 - predict - INFO - Model loaded.
+2025-11-19 19:38:55,992 - predict - INFO - Making predictions for 20640 rows.
+2025-11-19 19:38:57,103 - visualize - INFO - Prediction plot saved to backend/static/predictions.png
+2025-11-24 18:37:46,051 - train_model - INFO - Starting model training...
+2025-11-24 18:38:34,839 - train_model - INFO - Model training finished.
+2025-11-24 18:38:35,205 - train_model - INFO - MAE: 32034.677, R2: 0.812
+2025-11-24 18:38:38,809 - train_model - INFO - Model saved to models/model.pkl
+2025-11-24 18:45:36,396 - train_model - INFO - Starting model training...
+2025-11-24 18:46:21,778 - train_model - INFO - Model training finished.
+2025-11-24 18:46:22,047 - train_model - INFO - MAE: 32034.677, R2: 0.812
+2025-11-24 18:46:22,518 - train_model - INFO - Model saved to models/model.pkl
+2025-11-24 18:51:29,793 - predict - INFO - Loading model...
+2025-11-24 18:51:32,694 - predict - INFO - Model loaded.
+2025-11-24 18:51:32,694 - predict - INFO - Making predictions for 20640 rows.
+2025-11-24 18:51:33,740 - visualize - INFO - Prediction plot saved to backend/static/predictions.png
+2025-11-24 18:54:43,650 - predict - INFO - Loading model...
+2025-11-24 18:54:45,689 - predict - INFO - Model loaded.
+2025-11-24 18:54:45,690 - predict - INFO - Making predictions for 20640 rows.
+2025-11-24 18:54:46,586 - visualize - INFO - Prediction plot saved to backend/static/predictions.png
